@@ -1,6 +1,7 @@
 pub mod empty;
 pub mod map;
 pub mod and;
+pub mod repeat;
 
 use crate::prelude::*;
 
