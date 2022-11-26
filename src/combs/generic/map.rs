@@ -14,7 +14,7 @@ pub struct Map<'a, I, O1, O2, E> {
   mapper: Box<dyn Fn(O1) -> O2 + 'a>,
 }
 impl<'a, I, O1, O2, E> Parse<'a, I, O2, E> for Map<'a, I, O1, O2, E> {
-  fn parse(&mut self, context: I) -> ParseResult<I, O2, E> {
+  fn parse(&self, context: I) -> ParseResult<I, O2, E> {
     self.parser.parse(context).map(|o1| {
       (o1.0, (self.mapper)(o1.1))
     })
@@ -45,7 +45,7 @@ pub struct AndThen<'a, I, O1, O2, E> {
   mapper: Box<dyn Fn(O1) -> Result<O2, E> + 'a>,
 }
 impl<'a, I, O1, O2, E> Parse<'a, I, O2, E> for AndThen<'a, I, O1, O2, E> {
-  fn parse(&mut self, context: I) -> ParseResult<I, O2, E> {
+  fn parse(&self, context: I) -> ParseResult<I, O2, E> {
     self.parser.parse(context).and_then(|(remain, o1)| {
       (self.mapper)(o1).map(|output| (remain, output))
     })
