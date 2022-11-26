@@ -4,7 +4,7 @@ use crate::prelude::*;
 ///
 /// When working with `Map`, you should make sure that the `mapper` will never fail.
 /// That is, `mapper` never takes side effects, it's completely pure.
-/// 
+///
 /// # Arguments
 ///
 /// * `parser` - The parser whose result is going to be mapped
@@ -20,7 +20,7 @@ impl<'a, I, O1, O2, E> Parse<'a, I, O2, E> for Map<'a, I, O1, O2, E> {
     })
   }
 }
-impl<'a, I, O1, O2, E> Map<'a, I, O1, O2, E> {
+impl<'a, I: 'a, O1: 'a, O2: 'a, E: 'a> Map<'a, I, O1, O2, E> {
   pub fn new(
     parser: impl Parse<'a, I, O1, E> + 'a,
     mapper: impl Fn(O1) -> O2 + 'a
@@ -51,7 +51,7 @@ impl<'a, I, O1, O2, E> Parse<'a, I, O2, E> for AndThen<'a, I, O1, O2, E> {
     })
   }
 }
-impl<'a, I, O1, O2, E> AndThen<'a, I, O1, O2, E> {
+impl<'a, I: 'a, O1: 'a, O2: 'a, E: 'a> AndThen<'a, I, O1, O2, E> {
   pub fn new(
     parser: impl Parse<'a, I, O1, E> + 'a,
     mapper: impl Fn(O1) -> Result<O2, E> + 'a
