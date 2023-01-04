@@ -3,7 +3,7 @@ use crate::prelude::*;
 pub struct FnWrap<'a, I, O> {
   func: Box<dyn Fn(I) -> O + 'a>,
 }
-impl<'a, I: 'a, O: 'a> Parse<'a, I, O> for FnWrap<'a, I, O> {
+impl<'a, I, O> Parse<'a, I, O> for FnWrap<'a, I, O> {
   fn parse(&'a self, input: I) -> O {
     (self.func)(input)
   }

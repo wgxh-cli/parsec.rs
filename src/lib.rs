@@ -7,14 +7,14 @@ use prelude::*;
 /// The `Parse` trait
 ///
 /// **Definition**: A executable trait that take an input and returns a output.
-pub trait Parse<'a, I: 'a, O: 'a> {
+pub trait Parse<'a, I, O> {
   fn parse(&'a self, input: I) -> O;
 
-  fn cloned(&'a self) -> wrappers::BoxedParser<'a, I, O> {
-    wrappers::with_fn(move |i| self.parse(i)).boxed()
-  }
-  fn pipe<C>(&'a self, f: impl Parse<'a, O, C> + 'a) -> pipes::Pipe<'a, I, O, C> where Self: Sized + 'a {
-    pipes::Pipe::new(f, wrappers::with_fn(move |a| self.parse(a)))
+  fn pipe<AO>(
+    &'a self,
+    mapper: &'a (impl Comb<'a, I, O, AO> + 'a)
+  ) -> BoxedParser<'a, I, AO> where Self: Sized + 'a {
+    mapper.comb(self)
   }
   fn boxed(self) -> wrappers::BoxedParser<'a, I, O> where Self: Sized + 'a {
     wrappers::BoxedParser::new(self)
