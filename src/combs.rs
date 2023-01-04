@@ -6,8 +6,8 @@ use crate::prelude::*;
 
 pub trait Comb<'a, A, B, C> {
   fn comb(
-    &'a self,
+    self,
     parser: &'a (impl Parse<'a, A, B> + 'a)
-  ) -> BoxedParser<'a, A, C>;
+  ) -> BoxedParser<'a, A, C> where Self: 'a;
 }
 

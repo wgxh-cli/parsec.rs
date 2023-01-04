@@ -8,11 +8,11 @@ use prelude::*;
 ///
 /// **Definition**: A executable trait that take an input and returns a output.
 pub trait Parse<'a, I, O> {
-  fn parse(&'a self, input: I) -> O;
+  fn parse(&self, input: I) -> O;
 
   fn pipe<AO>(
     &'a self,
-    mapper: &'a (impl Comb<'a, I, O, AO> + 'a)
+    mapper: impl Comb<'a, I, O, AO> + 'a
   ) -> BoxedParser<'a, I, AO> where Self: Sized + 'a {
     mapper.comb(self)
   }
