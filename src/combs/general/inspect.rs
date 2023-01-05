@@ -29,3 +29,27 @@ impl<'a, I, O> Inspect<'a, I, O> {
 pub fn inspect<'a, I, O>(inspector: impl for<'b> Fn(&'b O) + 'a) -> Inspect<'a, I, O> {
   Inspect::new(inspector)
 }
+
+#[cfg(test)]
+mod test {
+  use crate::prelude::*;
+  use super::inspect;
+
+  struct Next;
+  impl<'a> Parse<'a, String, char> for Next {
+    fn parse(&self, input: String) -> char {
+      input.chars().next().unwrap()
+    }
+  }
+
+  #[test]
+  fn test() {
+    let test_suit = "wgxh".to_string();
+    assert_eq!(
+      Next
+        .pipe(inspect(|char| { dbg!(char); }))
+        .parse(test_suit),
+      'w'
+    );
+  }
+}
