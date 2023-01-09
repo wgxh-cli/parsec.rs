@@ -1,9 +1,3 @@
-pub mod general;
-pub mod errproc;
-
-pub use general::*;
-pub use errproc::*;
-
 use crate::prelude::*;
 
 pub trait Comb<'a, A, B, C> {

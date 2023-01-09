@@ -1,0 +1,7 @@
+[package]
+name = "parsec_utils"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+parsec_core = { path = "../parsec_core" }

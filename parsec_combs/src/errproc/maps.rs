@@ -1,4 +1,5 @@
-use crate::prelude::*;
+use parsec_core::prelude::*;
+use crate::map_fn;
 use std::marker::PhantomData;
 
 pub struct MapOk<'a, I, O1, O2, E> {

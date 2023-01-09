@@ -1,4 +1,5 @@
-use crate::prelude::*;
+use parsec_core::prelude::*;
+use crate::*;
 use std::marker::PhantomData;
 
 pub struct InspectOk<'a, I, O, E> {

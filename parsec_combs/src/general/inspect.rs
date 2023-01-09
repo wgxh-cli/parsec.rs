@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use parsec_core::prelude::*;
 use std::marker::PhantomData;
 
 pub struct Inspect<'a, I, O> {
@@ -32,7 +32,7 @@ pub fn inspect<'a, I, O>(inspector: impl for<'b> Fn(&'b O) + 'a) -> Inspect<'a, 
 
 #[cfg(test)]
 mod test {
-  use crate::prelude::*;
+  use parsec_core::prelude::*;
   use super::inspect;
 
   struct Next;

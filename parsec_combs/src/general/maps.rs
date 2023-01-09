@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use parsec_core::prelude::*;
 use std::marker::PhantomData;
 
 pub struct Map<'a, A, B, C> {
@@ -36,7 +36,7 @@ pub fn map_fn<'a, A: 'a, B: 'a, C: 'a>(mapper: impl Fn(B) -> C + 'a) -> Map<'a, 
 // It will be changed soon.
 #[cfg(test)]
 mod test {
-  use crate::prelude::*;
+  use parsec_core::prelude::*;
   use super::map_fn;
 
   pub struct Next;

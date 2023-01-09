@@ -3,6 +3,20 @@ name = "parsec"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [
+  "./parsec_core",
+  "./parsec_combs",
+  "./parsec_utils",
+ ]
+
+[features]
+default = ["core", "utils", "combs"]
+core = ["dep:parsec_core"]
+utils = ["dep:parsec_utils"]
+combs = ["dep:parsec_combs"]
 
 [dependencies]
+parsec_core = { path = "./parsec_core", optional = true }
+parsec_utils = { path = "./parsec_utils", optional = true }
+parsec_combs = { path = "./parsec_combs", optional = true }
