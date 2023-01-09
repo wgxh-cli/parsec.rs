@@ -7,3 +7,4 @@
 //! But these traits enable you to use your own types instead of builtin types.
 
 pub mod maps;
+pub mod inspect;
